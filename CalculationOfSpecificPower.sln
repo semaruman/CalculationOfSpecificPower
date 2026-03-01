@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculationOfSpecificPowerC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculationOfSpecificPowerWinFormsApp", "CalculationOfSpecificPowerWinFormsApp\CalculationOfSpecificPowerWinFormsApp.csproj", "{99DFA189-1E35-4F3A-B322-D14FAA6FE059}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desctop", "Desctop", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
