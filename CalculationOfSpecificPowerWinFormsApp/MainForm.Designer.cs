@@ -49,15 +49,15 @@
             momentTextBox = new TextBox();
             label11 = new Label();
             LEPlengthTextBox = new TextBox();
+            label12 = new Label();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Calibri", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             label1.Location = new Point(30, 78);
             label1.Name = "label1";
-            label1.Size = new Size(154, 15);
+            label1.Size = new Size(155, 15);
             label1.TabIndex = 0;
             label1.Text = "Количество потребителей:";
             // 
@@ -97,7 +97,6 @@
             // 
             // CalculateButton
             // 
-            CalculateButton.Font = new Font("Calibri", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             CalculateButton.Location = new Point(172, 250);
             CalculateButton.Name = "CalculateButton";
             CalculateButton.Size = new Size(114, 45);
@@ -191,7 +190,6 @@
             // 
             // button1
             // 
-            button1.Font = new Font("Calibri", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             button1.Location = new Point(309, 250);
             button1.Name = "button1";
             button1.Size = new Size(114, 45);
@@ -232,11 +230,22 @@
             LEPlengthTextBox.Size = new Size(100, 23);
             LEPlengthTextBox.TabIndex = 20;
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Calibri", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label12.Location = new Point(161, 9);
+            label12.Name = "label12";
+            label12.Size = new Size(262, 26);
+            label12.TabIndex = 21;
+            label12.Text = "Расчёт удельной мощности";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(584, 461);
+            Controls.Add(label12);
             Controls.Add(LEPlengthTextBox);
             Controls.Add(label11);
             Controls.Add(momentTextBox);
@@ -288,5 +297,6 @@
         private TextBox momentTextBox;
         private Label label11;
         private TextBox LEPlengthTextBox;
+        private Label label12;
     }
 }
