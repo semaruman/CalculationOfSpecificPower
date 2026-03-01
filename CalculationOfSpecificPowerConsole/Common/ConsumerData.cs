@@ -48,10 +48,30 @@ namespace CalculationOfSpecificPowerConsole.Common
          * Формат возвращаемого значения - список с данными:
          * [текущее количество потребителей, мин. значение квартир, макс. значение квартир, мин. кВТ, макс. кВт]
         */
-        public static List<double> GetDataList(int consCount, string consType = "")
+        public static List<double> GetDataList(int consCount, string consType)
         {
-            List<double> Selectedlist = ElectricCookers;
             List<double> ResultList = new List<double> { consCount };
+
+            List<double> Selectedlist = new List<double>();
+
+            if (consType == "электрические плиты")
+            {
+                Selectedlist = ElectricCookers;
+            }
+            else if (consType == "природный газ")
+            {
+                Selectedlist = NaturalGasKW;
+            }
+            else if (consType == "сжиженный газ")
+            {
+                Selectedlist = LiquefiedGas;
+            }
+            else if (consType == "садовые домики")
+            {
+                Selectedlist = GardenHouses;
+            }
+            
+            
 
             for (int i = 0; i < ConsumersCounts.Count; i++)
             {
