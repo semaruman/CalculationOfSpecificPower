@@ -14,9 +14,9 @@ public class Program
         var fullspecPower = PowerCalculator.CalculateFullSpecificPower(consCount, specPower);
         var tok = PowerCalculator.CalculateTok(fullspecPower);
 
-        Console.WriteLine($"На одну квартиру: {specPower}");
-        Console.WriteLine($"На все квартиры: {fullspecPower}");
-        Console.WriteLine($"Ток: {tok}");
+        Console.WriteLine($"На одну квартиру: {Math.Round(specPower, 2)}");
+        Console.WriteLine($"На все квартиры: {Math.Round(fullspecPower, 2)}");
+        Console.WriteLine($"Ток: {Math.Round(tok, 2)}");
 
         Console.WriteLine();
 
@@ -25,13 +25,13 @@ public class Program
 
         var moment = PowerCalculator.CalculateMoment(length, fullspecPower);
 
-        Console.WriteLine($"Момент: {moment}");
+        Console.WriteLine($"Момент: {Math.Round(moment, 2)}");
 
         Console.WriteLine("Введите сечение");
         double section = Convert.ToDouble(Console.ReadLine());
 
         var lossesPercent = PowerCalculator.CalculateLossesPercent(moment, section);
 
-        Console.WriteLine($"% потерь: {lossesPercent}");
+        Console.WriteLine($"% потерь: {Math.Round(lossesPercent, 2)}");
     }
 }
