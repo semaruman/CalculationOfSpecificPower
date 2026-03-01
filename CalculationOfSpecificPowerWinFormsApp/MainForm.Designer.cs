@@ -42,6 +42,8 @@
             specificPowertextBox = new TextBox();
             specificPowerFullTextBox = new TextBox();
             tokTextBox = new TextBox();
+            label8 = new Label();
+            label9 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -161,11 +163,31 @@
             tokTextBox.Size = new Size(100, 23);
             tokTextBox.TabIndex = 13;
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(442, 427);
+            label8.Name = "label8";
+            label8.Size = new Size(86, 15);
+            label8.TabIndex = 14;
+            label8.Text = "Румянцев С.Д.";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(442, 442);
+            label9.Name = "label9";
+            label9.Size = new Size(132, 15);
+            label9.TabIndex = 15;
+            label9.Text = "semaruman@yandex.ru";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(584, 461);
+            Controls.Add(label9);
+            Controls.Add(label8);
             Controls.Add(tokTextBox);
             Controls.Add(specificPowerFullTextBox);
             Controls.Add(specificPowertextBox);
@@ -203,5 +225,7 @@
         private TextBox specificPowertextBox;
         private TextBox specificPowerFullTextBox;
         private TextBox tokTextBox;
+        private Label label8;
+        private Label label9;
     }
 }
