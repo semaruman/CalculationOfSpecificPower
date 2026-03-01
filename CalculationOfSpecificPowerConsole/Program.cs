@@ -4,12 +4,7 @@ public class Program
 {
     public static void Main()
     {
-        while (true)
-        {
-            Console.WriteLine("Выберите опцию:");
-            Console.WriteLine("1 - посчитать удельную мощность");
-            Console.WriteLine("2 - посчитать удельную мощность");
-        }
+        
 
         Console.WriteLine("Введите количество потребителей:");
 
