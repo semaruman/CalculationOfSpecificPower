@@ -44,14 +44,20 @@
             tokTextBox = new TextBox();
             label8 = new Label();
             label9 = new Label();
+            button1 = new Button();
+            label10 = new Label();
+            momentTextBox = new TextBox();
+            label11 = new Label();
+            LEPlengthTextBox = new TextBox();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new Font("Calibri", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             label1.Location = new Point(30, 78);
             label1.Name = "label1";
-            label1.Size = new Size(155, 15);
+            label1.Size = new Size(154, 15);
             label1.TabIndex = 0;
             label1.Text = "Количество потребителей:";
             // 
@@ -82,19 +88,21 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(249, 310);
+            label3.Font = new Font("Calibri", 14.25F, FontStyle.Italic, GraphicsUnit.Point, 204);
+            label3.Location = new Point(240, 307);
             label3.Name = "label3";
-            label3.Size = new Size(60, 15);
+            label3.Size = new Size(105, 23);
             label3.TabIndex = 4;
             label3.Text = "Результат";
             // 
             // CalculateButton
             // 
-            CalculateButton.Location = new Point(226, 241);
+            CalculateButton.Font = new Font("Calibri", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            CalculateButton.Location = new Point(172, 250);
             CalculateButton.Name = "CalculateButton";
             CalculateButton.Size = new Size(114, 45);
             CalculateButton.TabIndex = 5;
-            CalculateButton.Text = "Рассчитать";
+            CalculateButton.Text = "Рассчитать мощность";
             CalculateButton.UseVisualStyleBackColor = true;
             CalculateButton.Click += CalculateButton_Click;
             // 
@@ -128,7 +136,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(442, 78);
+            label7.Location = new Point(56, 220);
             label7.Name = "label7";
             label7.Size = new Size(39, 15);
             label7.TabIndex = 9;
@@ -136,7 +144,7 @@
             // 
             // cosFTextBox
             // 
-            cosFTextBox.Location = new Point(427, 110);
+            cosFTextBox.Location = new Point(45, 238);
             cosFTextBox.Name = "cosFTextBox";
             cosFTextBox.Size = new Size(74, 23);
             cosFTextBox.TabIndex = 10;
@@ -181,11 +189,59 @@
             label9.TabIndex = 15;
             label9.Text = "semaruman@yandex.ru";
             // 
+            // button1
+            // 
+            button1.Font = new Font("Calibri", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button1.Location = new Point(309, 250);
+            button1.Name = "button1";
+            button1.Size = new Size(114, 45);
+            button1.TabIndex = 16;
+            button1.Text = "Рассчитать момент";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(368, 345);
+            label10.Name = "label10";
+            label10.Size = new Size(55, 15);
+            label10.TabIndex = 17;
+            label10.Text = "Момент:";
+            // 
+            // momentTextBox
+            // 
+            momentTextBox.Location = new Point(442, 342);
+            momentTextBox.Name = "momentTextBox";
+            momentTextBox.Size = new Size(100, 23);
+            momentTextBox.TabIndex = 18;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(442, 78);
+            label11.Name = "label11";
+            label11.Size = new Size(112, 15);
+            label11.TabIndex = 19;
+            label11.Text = "Длина ЛЭП метров";
+            // 
+            // LEPlengthTextBox
+            // 
+            LEPlengthTextBox.Location = new Point(454, 96);
+            LEPlengthTextBox.Name = "LEPlengthTextBox";
+            LEPlengthTextBox.Size = new Size(100, 23);
+            LEPlengthTextBox.TabIndex = 20;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(584, 461);
+            Controls.Add(LEPlengthTextBox);
+            Controls.Add(label11);
+            Controls.Add(momentTextBox);
+            Controls.Add(label10);
+            Controls.Add(button1);
             Controls.Add(label9);
             Controls.Add(label8);
             Controls.Add(tokTextBox);
@@ -227,5 +283,10 @@
         private TextBox tokTextBox;
         private Label label8;
         private Label label9;
+        private Button button1;
+        private Label label10;
+        private TextBox momentTextBox;
+        private Label label11;
+        private TextBox LEPlengthTextBox;
     }
 }

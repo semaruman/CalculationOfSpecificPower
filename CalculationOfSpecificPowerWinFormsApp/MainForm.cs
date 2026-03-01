@@ -5,6 +5,7 @@ namespace CalculationOfSpecificPowerWinFormsApp
 {
     public partial class MainForm : Form
     {
+        double fullspecPower = -1;
         public MainForm()
         {
             InitializeComponent();
@@ -43,7 +44,7 @@ namespace CalculationOfSpecificPowerWinFormsApp
             var dataList = ConsumerData.GetDataList(consCount, consType);
 
             var specPower = PowerCalculator.CalculateSpecificPower((int)dataList[0], (int)dataList[1], (int)dataList[2], dataList[3], dataList[4]);
-            var fullspecPower = PowerCalculator.CalculateFullSpecificPower(consCount, specPower);
+            fullspecPower = PowerCalculator.CalculateFullSpecificPower(consCount, specPower);
 
             double cosF;
 
@@ -59,9 +60,33 @@ namespace CalculationOfSpecificPowerWinFormsApp
 
             var tok = PowerCalculator.CalculateTok(fullspecPower, cosF);
 
-            specificPowertextBox.Text =  $"{Math.Round(specPower, 2)}";
+            specificPowertextBox.Text = $"{Math.Round(specPower, 2)}";
             specificPowerFullTextBox.Text = $"{Math.Round(fullspecPower, 2)}";
             tokTextBox.Text = $"{Math.Round(tok, 2)}";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (fullspecPower == -1)
+            {
+                MessageBox.Show("Мощность не расчитана");
+                return;
+            }
+
+            double length = -1;
+
+            try
+            {
+                length = Convert.ToDouble(LEPlengthTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Длина ЛЭП должна быть числом", "Не верный формат входных данных");
+                return;
+            }
+
+            var moment = PowerCalculator.CalculateMoment(length, fullspecPower);
+            momentTextBox.Text = $"{Math.Round(moment, 2)}";
         }
     }
 }
