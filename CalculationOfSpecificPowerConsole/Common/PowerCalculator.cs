@@ -47,7 +47,7 @@ namespace CalculationOfSpecificPowerConsole.Common
 
         public static double CalculateTok(double fullSpecificPower, double cosF = 0.98)
         {
-            return fullSpecificPower / 0.38 / cosF / 1.73;
+            return fullSpecificPower / 0.38 / cosF / Math.Sqrt(3);
         }
     }
 }
