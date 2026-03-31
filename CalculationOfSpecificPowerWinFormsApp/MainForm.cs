@@ -60,9 +60,9 @@ namespace CalculationOfSpecificPowerWinFormsApp
 
             var tok = PowerCalculator.CalculateTok(fullspecPower, cosF);
 
-            specificPowertextBox.Text = $"{Math.Round(specPower, 2)}";
-            specificPowerFullTextBox.Text = $"{Math.Round(fullspecPower, 2)}";
-            tokTextBox.Text = $"{Math.Round(tok, 2)}";
+            specificPowertextBox.Text = $"{Math.Round(specPower, 3)}";
+            specificPowerFullTextBox.Text = $"{Math.Round(fullspecPower, 3)}";
+            tokTextBox.Text = $"{Math.Round(tok, 3)}";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -86,7 +86,12 @@ namespace CalculationOfSpecificPowerWinFormsApp
             }
 
             var moment = PowerCalculator.CalculateMoment(length, fullspecPower);
-            momentTextBox.Text = $"{Math.Round(moment, 2)}";
+            momentTextBox.Text = $"{Math.Round(moment, 3)}";
+        }
+
+        private void tokTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

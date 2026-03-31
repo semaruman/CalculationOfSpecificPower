@@ -110,14 +110,14 @@
             label4.AutoSize = true;
             label4.Location = new Point(26, 350);
             label4.Name = "label4";
-            label4.Size = new Size(104, 15);
+            label4.Size = new Size(132, 15);
             label4.TabIndex = 6;
-            label4.Text = "Итого кВт на 1 кв:";
+            label4.Text = "Итого кВт на 1 кв, Pуд.:";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(26, 374);
+            label5.Location = new Point(67, 374);
             label5.Name = "label5";
             label5.Size = new Size(84, 15);
             label5.TabIndex = 7;
@@ -126,11 +126,11 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(26, 403);
+            label6.Location = new Point(100, 400);
             label6.Name = "label6";
-            label6.Size = new Size(30, 15);
+            label6.Size = new Size(46, 15);
             label6.TabIndex = 8;
-            label6.Text = "Ток:";
+            label6.Text = "Ток, Iр:";
             // 
             // label7
             // 
@@ -151,24 +151,25 @@
             // 
             // specificPowertextBox
             // 
-            specificPowertextBox.Location = new Point(146, 342);
+            specificPowertextBox.Location = new Point(161, 342);
             specificPowertextBox.Name = "specificPowertextBox";
             specificPowertextBox.Size = new Size(100, 23);
             specificPowertextBox.TabIndex = 11;
             // 
             // specificPowerFullTextBox
             // 
-            specificPowerFullTextBox.Location = new Point(146, 371);
+            specificPowerFullTextBox.Location = new Point(161, 371);
             specificPowerFullTextBox.Name = "specificPowerFullTextBox";
             specificPowerFullTextBox.Size = new Size(100, 23);
             specificPowerFullTextBox.TabIndex = 12;
             // 
             // tokTextBox
             // 
-            tokTextBox.Location = new Point(146, 400);
+            tokTextBox.Location = new Point(161, 400);
             tokTextBox.Name = "tokTextBox";
             tokTextBox.Size = new Size(100, 23);
             tokTextBox.TabIndex = 13;
+            tokTextBox.TextChanged += tokTextBox_TextChanged;
             // 
             // label8
             // 
