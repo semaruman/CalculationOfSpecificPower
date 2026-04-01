@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CalculationOfSpecificPowerConsole.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CalculationOfSpecificPowerWebApp.Controllers
@@ -7,6 +8,17 @@ namespace CalculationOfSpecificPowerWebApp.Controllers
     [ApiController]
     public class CalculatorController : ControllerBase
     {
-        
+        [HttpGet("specific-power")]
+        public IActionResult GetSpecificPower(int count, string type)
+        {
+            var dataList = ConsumerData.GetDataList(count, type);
+
+            double specPower = PowerCalculator.CalculateSpecificPower((int)dataList[0], (int)dataList[1], (int)dataList[2], dataList[3], dataList[4]);
+            
+            return Ok(new
+            {
+                SpecificPower = specPower,
+            });
+        }
     }
 }
