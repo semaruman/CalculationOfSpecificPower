@@ -50,5 +50,20 @@ namespace CalculationOfSpecificPowerWebApp.Controllers
                 ElectricCurrent = tok,
             });
         }
+
+        [HttpGet("moment")]
+        public IActionResult GetMoment(int count, string type, double length)
+        {
+            var dataList = ConsumerData.GetDataList(count, type);
+
+            double specPower = PowerCalculator.CalculateSpecificPower((int)dataList[0], (int)dataList[1], (int)dataList[2], dataList[3], dataList[4]);
+            double fullspecPower = PowerCalculator.CalculateFullSpecificPower(count, specPower);
+            double moment = PowerCalculator.CalculateMoment(length, fullspecPower);
+
+            return Ok(new
+            {
+                Moment = moment,
+            });
+        }
     }
 }
