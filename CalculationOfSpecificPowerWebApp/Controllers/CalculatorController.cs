@@ -34,5 +34,21 @@ namespace CalculationOfSpecificPowerWebApp.Controllers
                 FellSpecificPower = fullspecPower,
             });
         }
+
+
+        [HttpGet("electric-current")]
+        public IActionResult GetElectricCurrent(int count, string type, double cosF = 0.98)
+        {
+            var dataList = ConsumerData.GetDataList(count, type);
+
+            double specPower = PowerCalculator.CalculateSpecificPower((int)dataList[0], (int)dataList[1], (int)dataList[2], dataList[3], dataList[4]);
+            double fullspecPower = PowerCalculator.CalculateFullSpecificPower(count, specPower);
+
+            double tok = PowerCalculator.CalculateTok(fullspecPower, cosF);
+
+            return Ok(new { 
+                ElectricCurrent = tok,
+            });
+        }
     }
 }
