@@ -1,13 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net8.0-windows</TargetFramework>
+		
 		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<ApplicationIcon>icon.ico</ApplicationIcon>
 
+		<Comment>
+		<ApplicationIcon>icon.ico</ApplicationIcon>
+		
 		<!-- Настройки для публикации в один файл -->
 		<PublishSingleFile>true</PublishSingleFile>
 		<SelfContained>true</SelfContained>
@@ -17,7 +21,7 @@
 
 		<!-- Указываем поддерживаемые платформы -->
 		<RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
-
+		</Comment>
 	</PropertyGroup>
 
 	<ItemGroup>
