@@ -20,5 +20,19 @@ namespace CalculationOfSpecificPowerWebApp.Controllers
                 SpecificPower = specPower,
             });
         }
+
+        [HttpGet("rated-power")]
+        public IActionResult GetRatedPower(int count, string type)
+        {
+            var dataList = ConsumerData.GetDataList(count, type);
+
+            double specPower = PowerCalculator.CalculateSpecificPower((int)dataList[0], (int)dataList[1], (int)dataList[2], dataList[3], dataList[4]);
+            double fullspecPower = PowerCalculator.CalculateFullSpecificPower(count, specPower);
+
+            return Ok(new
+            {
+                FellSpecificPower = fullspecPower,
+            });
+        }
     }
 }
