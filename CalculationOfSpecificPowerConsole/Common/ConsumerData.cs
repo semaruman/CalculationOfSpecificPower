@@ -70,29 +70,32 @@ namespace CalculationOfSpecificPowerConsole.Common
             {
                 Selectedlist = GardenHouses;
             }
-            
-            
-
-            for (int i = 0; i < ConsumersCounts.Count; i++)
+            else
             {
-                if (ConsumersCounts[i] >= consCount)
+                return null;
+            }
+
+
+                for (int i = 0; i < ConsumersCounts.Count; i++)
                 {
-                    if (i != 0)
+                    if (ConsumersCounts[i] >= consCount)
                     {
-                        ResultList.Add(ConsumersCounts[i - 1]); // добавил мин. значение квартир
-                        ResultList.Add(ConsumersCounts[i]); // добавил макс. значение квартир
-                        ResultList.Add(Selectedlist[i]); // добавил мин. значение кВт
-                        ResultList.Add(Selectedlist[i - 1]); // добавил макс. значение кВт
-                    }
-                    else
-                    {
-                        ResultList.Add(1); // добавил мин. значение квартир
-                        ResultList.Add(ConsumersCounts[i]); // добавил макс. значение квартир
-                        ResultList.Add(Selectedlist[i]); // добавил мин. значение кВт
-                        ResultList.Add(Selectedlist[i]); // добавил макс. значение кВт
+                        if (i != 0)
+                        {
+                            ResultList.Add(ConsumersCounts[i - 1]); // добавил мин. значение квартир
+                            ResultList.Add(ConsumersCounts[i]); // добавил макс. значение квартир
+                            ResultList.Add(Selectedlist[i]); // добавил мин. значение кВт
+                            ResultList.Add(Selectedlist[i - 1]); // добавил макс. значение кВт
+                        }
+                        else
+                        {
+                            ResultList.Add(1); // добавил мин. значение квартир
+                            ResultList.Add(ConsumersCounts[i]); // добавил макс. значение квартир
+                            ResultList.Add(Selectedlist[i]); // добавил мин. значение кВт
+                            ResultList.Add(Selectedlist[i]); // добавил макс. значение кВт
+                        }
                     }
                 }
-            }
 
             return ResultList;
         }

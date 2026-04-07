@@ -12,6 +12,10 @@ namespace CalculationOfSpecificPowerWebApp.Controllers
         public IActionResult GetSpecificPower(int count, string type)
         {
             var dataList = ConsumerData.GetDataList(count, type);
+            if (dataList == null)
+            {
+                return BadRequest("Неверный тип потребителя");
+            }
 
             double specPower = PowerCalculator.CalculateSpecificPower((int)dataList[0], (int)dataList[1], (int)dataList[2], dataList[3], dataList[4]);
             
@@ -25,6 +29,10 @@ namespace CalculationOfSpecificPowerWebApp.Controllers
         public IActionResult GetRatedPower(int count, string type)
         {
             var dataList = ConsumerData.GetDataList(count, type);
+            if (dataList == null)
+            {
+                return BadRequest("Неверный тип потребителя");
+            }
 
             double specPower = PowerCalculator.CalculateSpecificPower((int)dataList[0], (int)dataList[1], (int)dataList[2], dataList[3], dataList[4]);
             double fullspecPower = PowerCalculator.CalculateFullSpecificPower(count, specPower);
@@ -40,6 +48,10 @@ namespace CalculationOfSpecificPowerWebApp.Controllers
         public IActionResult GetElectricCurrent(int count, string type, double cosF = 0.98)
         {
             var dataList = ConsumerData.GetDataList(count, type);
+            if (dataList == null)
+            {
+                return BadRequest("Неверный тип потребителя");
+            }
 
             double specPower = PowerCalculator.CalculateSpecificPower((int)dataList[0], (int)dataList[1], (int)dataList[2], dataList[3], dataList[4]);
             double fullspecPower = PowerCalculator.CalculateFullSpecificPower(count, specPower);
@@ -55,6 +67,10 @@ namespace CalculationOfSpecificPowerWebApp.Controllers
         public IActionResult GetMoment(int count, string type, double length)
         {
             var dataList = ConsumerData.GetDataList(count, type);
+            if (dataList == null)
+            {
+                return BadRequest("Неверный тип потребителя");
+            }
 
             double specPower = PowerCalculator.CalculateSpecificPower((int)dataList[0], (int)dataList[1], (int)dataList[2], dataList[3], dataList[4]);
             double fullspecPower = PowerCalculator.CalculateFullSpecificPower(count, specPower);

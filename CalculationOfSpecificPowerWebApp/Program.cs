@@ -1,9 +1,17 @@
+using CalculationOfSpecificPowerWebApp.Infrastructure;
 using CalculationOfSpecificPowerWebApp.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
+//добавляю сервис для обработки всех исключений
+builder.Services.AddExceptionHandler<ExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
+
+//подключаю обработчик исключений
+app.UseExceptionHandler();
 
 //подключаю middleware для логгирования
 app.UseLoggingMiddleware();
