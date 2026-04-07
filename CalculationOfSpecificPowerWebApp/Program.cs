@@ -1,7 +1,12 @@
+using CalculationOfSpecificPowerWebApp.Middleware;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+//подключаю middleware для логгирования
+app.UseLoggingMiddleware();
 
 app.MapControllers();
 
