@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculationOfSpecificPowerW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculationOfSpecificPowerWebApp", "CalculationOfSpecificPowerWebApp\CalculationOfSpecificPowerWebApp.csproj", "{E8D9EB18-30E2-4122-B8FE-70A987D21B9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculationOfSpecificPower.Tests", "CalculationOfSpecificPower.Tests\CalculationOfSpecificPower.Tests.csproj", "{7D3E755F-B417-4AC5-BCA5-E02192128D75}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculationOfSpecificPowerConsole.Tests", "CalculationOfSpecificPower.Tests\CalculationOfSpecificPowerConsole.Tests.csproj", "{7D3E755F-B417-4AC5-BCA5-E02192128D75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
