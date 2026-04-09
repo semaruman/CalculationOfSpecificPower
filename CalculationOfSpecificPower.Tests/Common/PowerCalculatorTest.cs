@@ -27,5 +27,25 @@ namespace CalculationOfSpecificPowerConsole.Tests.Common
 
             Assert.Equal(correctSpecificPower, calculatorSpecificPower);
         }
+
+        [Theory]
+        [InlineData(23, 18, 24, 1.4, 1.65)]
+        public void CalculateFullSpecificPower_ReturnsCorrectNumber(
+            int currentFlat,
+            int flatMin,
+            int flatMax,
+            double kilowattMin,
+            double kilowattMax)
+        {
+            double kilowattDefference = kilowattMax - kilowattMin;
+            int flatDefference = flatMax - flatMin;
+            int currentFlatDef = currentFlat - flatMin;
+            double specificPower = kilowattMax - kilowattDefference / flatDefference * currentFlatDef;
+
+            double currectFullSpecificPower = specificPower * currentFlat;
+            double calculatorFullSpecificPower = PowerCalculator.CalculateFullSpecificPower(currentFlat, flatMin, flatMax, kilowattMin, kilowattMax);
+
+            Assert.Equal(currectFullSpecificPower, calculatorFullSpecificPower);
+        }
     }
 }
