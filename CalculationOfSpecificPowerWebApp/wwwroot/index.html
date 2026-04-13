@@ -22,15 +22,35 @@
         <input type="number" id="cosF" name="cosF" value="0.98" step="any">
         <br/>
         <button type="submit">Расчитать мощность</button>
+        <br/>
+        <p>Длина ЛЭП метров:</p>
+        <input type="number" id="length" name="length" step="any">
+        <button onclick="calculateMoment()">Расчитать момент</button>
     </form>
 
     <div>
         <div id="specificPower"></div>
         <div id="ratedPower"></div>
         <div id="tokPower"></div>
+        <div id="moment"></div>
     </div>
 
     <script>
+        async function calculateMoment(){
+            //получение значений из полей формы
+            const count = document.getElementById('count').value;
+            const type = document.getElementById('type').value;
+            const length = document.getElementById('length').value;
+
+            const momentResponse = await fetch(`/api/Calculator/moment?count=${count}&type=${type}&length=${length}`);
+
+            const momentData = await momentResponse.json();
+
+            const moment = momentData.moment;
+
+            document.getElementById('moment').innerHTML = `Момент: ${moment}`;
+        }
+
         // Эта функция сработает при отправке формы
         document.getElementById('powerForm').addEventListener('submit', async function(event) {
             event.preventDefault(); // Отменяем перезагрузку страницы
