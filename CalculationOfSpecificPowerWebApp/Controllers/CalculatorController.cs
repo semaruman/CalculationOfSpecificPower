@@ -39,7 +39,7 @@ namespace CalculationOfSpecificPowerWebApp.Controllers
 
             return Ok(new
             {
-                FellSpecificPower = fullspecPower,
+                FullSpecificPower = fullspecPower,
             });
         }
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Расчёт удельной мощности</h1>
+    <form id="powerForm" method="post">
+        <p>Количество потребителей:</p>
+        <input type="number" id="count" name="count" required>
+        <br/>
+        <p>Тип потребителя:</p>
+        <select id="type" name="type" required>
+            <option>природный газ</option>
+            <option>сжиженный газ</option>
+            <option>электрические плиты</option>
+            <option>садовые домики</option>
+        </select>
+        <p>Cos φ</p>
+        <input type="namber" name="cosF" value="0.98" step="any">
+        <br/>
+        <button type="submit" formaction="/api/calculator/specific-power">Расчитать мощность</button>
+    </form>
+
+    <div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Эта функция сработает при отправке формы
+        document.getElementById('powerForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Отменяем перезагрузку страницы
+            
+            // Получаем значения из полей формы
+            const count = document.getElementById('count').value;
+            const type = document.getElementById('type').value;
+            
+            // Отправляем запрос к вашему API
+            const response = await fetch(`/api/Calculator/specific-power?count=${count}&type=${type}`);
+            
+            // Получаем JSON ответ
+            const data = await response.json();
+            
+            // Извлекаем SpecificPower
+            const specificPower = data.specificPower;
+            
+            // Показываем результат на странице
+            document.getElementById('result').innerHTML = `Итого кВт на 1кв, Pуд.: ${specificPower}`;
+        });
+    </script>
+</body>
+</html>
