@@ -62,7 +62,7 @@
 
             const moment = momentData.moment;
 
-            document.getElementById('moment').innerHTML = `Момент: ${moment}`;
+            document.getElementById('moment').innerHTML = `Момент: ${moment.toFixed(3)}`;
         }
 
         // Эта функция сработает при отправке формы
@@ -88,9 +88,9 @@
             const ratedPower = ratedPowerData.fullSpecificPower;
             const tokPower = tokPowerData.electricCurrent;
             //отображение результата
-            document.getElementById('specificPower').innerHTML = `Итого кВт на 1кв, Pуд: ${specificPower}`;
-            document.getElementById('ratedPower').innerHTML = `Итого кВт, Pр: ${ratedPower}`;
-            document.getElementById('tokPower').innerHTML = `Ток, Iр: ${tokPower}`;
+            document.getElementById('specificPower').innerHTML = `Итого кВт на 1кв, Pуд: ${specificPower.toFixed(3)}`;
+            document.getElementById('ratedPower').innerHTML = `Итого кВт, Pр: ${ratedPower.toFixed(3)}`;
+            document.getElementById('tokPower').innerHTML = `Ток, Iр: ${tokPower.toFixed(3)}`;
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
