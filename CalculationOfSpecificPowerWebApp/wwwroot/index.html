@@ -19,13 +19,15 @@
             <option>садовые домики</option>
         </select>
         <p>Cos φ</p>
-        <input type="namber" name="cosF" value="0.98" step="any">
+        <input type="number" id="cosF" name="cosF" value="0.98" step="any">
         <br/>
-        <button type="submit" formaction="/api/calculator/specific-power">Расчитать мощность</button>
+        <button type="submit">Расчитать мощность</button>
     </form>
 
     <div>
-        <div id="result"></div>
+        <div id="specificPower"></div>
+        <div id="ratedPower"></div>
+        <div id="tokPower"></div>
     </div>
 
     <script>
@@ -33,21 +35,28 @@
         document.getElementById('powerForm').addEventListener('submit', async function(event) {
             event.preventDefault(); // Отменяем перезагрузку страницы
             
-            // Получаем значения из полей формы
+            //получение значений из полей формы
             const count = document.getElementById('count').value;
             const type = document.getElementById('type').value;
+            const cosF = document.getElementById('cosF').value;
             
-            // Отправляем запрос к вашему API
-            const response = await fetch(`/api/Calculator/specific-power?count=${count}&type=${type}`);
+            //отправка api на контроллер
+            const specPowerResponse = await fetch(`/api/Calculator/specific-power?count=${count}&type=${type}`);
+            const ratedPowerResponse = await fetch(`/api/Calculator/rated-power?count=${count}&type=${type}`);
+            const tokPowerResponse = await fetch(`/api/Calculator/electric-current?count=${count}&type=${type}&cosf=${cosF}`);
+            //получение json
+            const specPowerData = await specPowerResponse.json();
+            const ratedPowerData = await ratedPowerResponse.json();
+            const tokPowerData = await tokPowerResponse.json();
             
-            // Получаем JSON ответ
-            const data = await response.json();
-            
-            // Извлекаем SpecificPower
-            const specificPower = data.specificPower;
-            
-            // Показываем результат на странице
-            document.getElementById('result').innerHTML = `Итого кВт на 1кв, Pуд.: ${specificPower}`;
+            //извлечение знчений
+            const specificPower = specPowerData.specificPower;
+            const ratedPower = ratedPowerData.fullSpecificPower;
+            const tokPower = tokPowerData.electricCurrent;
+            //отображение результата
+            document.getElementById('specificPower').innerHTML = `Итого кВт на 1кв, Pуд.: ${specificPower}`;
+            document.getElementById('ratedPower').innerHTML = `Итого кВт, Pр.: ${ratedPower}`;
+            document.getElementById('tokPower').innerHTML = `Ток, Iр.: ${tokPower}`;
         });
     </script>
 </body>
