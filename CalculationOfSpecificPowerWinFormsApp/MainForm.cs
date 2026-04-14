@@ -73,9 +73,14 @@ namespace CalculationOfSpecificPowerWinFormsApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (fullspecPower == -1)
+            double power = -1;
+            try
             {
-                MessageBox.Show("Мощность не расчитана");
+                power = Convert.ToDouble(powerTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Мощность не расчитана. Вещественные числа отделяются запятой");
                 return;
             }
 
@@ -91,7 +96,7 @@ namespace CalculationOfSpecificPowerWinFormsApp
                 return;
             }
 
-            var moment = PowerCalculator.CalculateMoment(length, fullspecPower);
+            var moment = PowerCalculator.CalculateMoment(length, power);
             momentTextBox.Text = $"{Math.Round(moment, 3)}";
         }
 
