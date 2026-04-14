@@ -22,14 +22,27 @@
 		<!-- Указываем поддерживаемые платформы -->
 		<RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
 		</Comment>
+
+		<PackageIcon>icon.ico</PackageIcon>
+
+		<ApplicationIcon>icon.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Content Include="icon.ico" />
+		<Content Include="icon.ico">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\CalculationOfSpecificPowerConsole\CalculationOfSpecificPowerConsole.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="icon.ico">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 
 </Project>
