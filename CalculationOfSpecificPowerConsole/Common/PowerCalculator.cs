@@ -83,7 +83,9 @@ namespace CalculationOfSpecificPowerConsole.Common
         //расчёт потерь. Принимает мощность, длину в метрах, коэффициент С, площадь сечения S
         public static double CalculateLosses(double power, double length, double C, double S)
         {
-            return (power * length) / (C * S);
+            double losses = (power * length) / (C * S);
+            _logger.LogInformation("Потери: {losses}", losses);
+            return losses;
         }
     }
 }

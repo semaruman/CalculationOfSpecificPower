@@ -19,6 +19,9 @@ namespace CalculationOfSpecificPowerWinFormsApp
             ConsumerTypesComboBox.Items.Add("сжиженный газ");
             ConsumerTypesComboBox.Items.Add("электрические плиты");
             ConsumerTypesComboBox.Items.Add("садовые домики");
+
+            KoefComboBox.Items.Add(44);
+            KoefComboBox.Items.Add(72);
         }
 
         private void CalculateButton_Click(object sender, EventArgs e)
@@ -62,6 +65,7 @@ namespace CalculationOfSpecificPowerWinFormsApp
 
             specificPowertextBox.Text = $"{Math.Round(specPower, 3)}";
             specificPowerFullTextBox.Text = $"{Math.Round(fullspecPower, 3)}";
+            powerTextBox.Text = $"{Math.Round(fullspecPower, 3)}".Replace('.', ',');
             tokTextBox.Text = $"{Math.Round(tok, 3)}";
         }
 
@@ -93,5 +97,57 @@ namespace CalculationOfSpecificPowerWinFormsApp
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            double power = -1;
+            try
+            {
+                power = Convert.ToDouble(powerTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Мощность не расчитана. Вещественные числа отделяются запятой");
+                return;
+            }
+
+            double length = -1;
+            try
+            {
+                length = Convert.ToDouble(LEPlengthTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Длина ЛЭП должна быть числом", "Не верный формат входных данных");
+                return;
+            }
+
+            double S = -1;
+            try
+            {
+                S = Convert.ToDouble(sectionTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Сечение должно быть числом; Вещественные числа отделяются запятой", "Не верный формат входных данных");
+                return;
+            }
+
+            double C = -1;
+            try
+            {
+                C = Convert.ToDouble(KoefComboBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Коэффициент должен быть числом; Вещественные числа отделяются запятой", "Не верный формат входных данных");
+                return;
+            }
+
+            double losses = PowerCalculator.CalculateLosses(power, length, C, S);
+
+            lossesTextBox.Text = Math.Round(losses, 2).ToString();
+        }
     }
 }
+

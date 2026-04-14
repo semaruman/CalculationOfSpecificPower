@@ -50,6 +50,15 @@
             label11 = new Label();
             LEPlengthTextBox = new TextBox();
             label12 = new Label();
+            label13 = new Label();
+            lossesTextBox = new TextBox();
+            label14 = new Label();
+            powerTextBox = new TextBox();
+            sectionTextBox = new TextBox();
+            label15 = new Label();
+            KoefComboBox = new ComboBox();
+            label16 = new Label();
+            button2 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -202,7 +211,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(368, 345);
+            label10.Location = new Point(319, 350);
             label10.Name = "label10";
             label10.Size = new Size(55, 15);
             label10.TabIndex = 17;
@@ -210,7 +219,7 @@
             // 
             // momentTextBox
             // 
-            momentTextBox.Location = new Point(442, 342);
+            momentTextBox.Location = new Point(299, 371);
             momentTextBox.Name = "momentTextBox";
             momentTextBox.Size = new Size(100, 23);
             momentTextBox.TabIndex = 18;
@@ -218,7 +227,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(442, 78);
+            label11.Location = new Point(309, 182);
             label11.Name = "label11";
             label11.Size = new Size(112, 15);
             label11.TabIndex = 19;
@@ -226,7 +235,7 @@
             // 
             // LEPlengthTextBox
             // 
-            LEPlengthTextBox.Location = new Point(454, 96);
+            LEPlengthTextBox.Location = new Point(311, 200);
             LEPlengthTextBox.Name = "LEPlengthTextBox";
             LEPlengthTextBox.Size = new Size(100, 23);
             LEPlengthTextBox.TabIndex = 20;
@@ -241,11 +250,95 @@
             label12.TabIndex = 21;
             label12.Text = "Расчёт удельной мощности";
             // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(477, 350);
+            label13.Name = "label13";
+            label13.Size = new Size(51, 15);
+            label13.TabIndex = 22;
+            label13.Text = "Потери:";
+            // 
+            // lossesTextBox
+            // 
+            lossesTextBox.Location = new Point(454, 371);
+            lossesTextBox.Name = "lossesTextBox";
+            lossesTextBox.Size = new Size(100, 23);
+            lossesTextBox.TabIndex = 23;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(462, 78);
+            label14.Name = "label14";
+            label14.Size = new Size(70, 15);
+            label14.TabIndex = 24;
+            label14.Text = "Мощность:";
+            // 
+            // powerTextBox
+            // 
+            powerTextBox.Location = new Point(454, 96);
+            powerTextBox.Name = "powerTextBox";
+            powerTextBox.Size = new Size(100, 23);
+            powerTextBox.TabIndex = 25;
+            // 
+            // sectionTextBox
+            // 
+            sectionTextBox.Location = new Point(454, 149);
+            sectionTextBox.Name = "sectionTextBox";
+            sectionTextBox.Size = new Size(100, 23);
+            sectionTextBox.TabIndex = 26;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(462, 131);
+            label15.Name = "label15";
+            label15.Size = new Size(57, 15);
+            label15.TabIndex = 27;
+            label15.Text = "Сечение:";
+            // 
+            // KoefComboBox
+            // 
+            KoefComboBox.FormattingEnabled = true;
+            KoefComboBox.Location = new Point(454, 200);
+            KoefComboBox.Name = "KoefComboBox";
+            KoefComboBox.Size = new Size(101, 23);
+            KoefComboBox.TabIndex = 28;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(462, 182);
+            label16.Name = "label16";
+            label16.Size = new Size(87, 15);
+            label16.TabIndex = 29;
+            label16.Text = "Коэффициент:";
+            // 
+            // button2
+            // 
+            button2.Location = new Point(454, 250);
+            button2.Name = "button2";
+            button2.Size = new Size(114, 45);
+            button2.TabIndex = 30;
+            button2.Text = "Рассчитать потери";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(584, 461);
+            Controls.Add(button2);
+            Controls.Add(label16);
+            Controls.Add(KoefComboBox);
+            Controls.Add(label15);
+            Controls.Add(sectionTextBox);
+            Controls.Add(powerTextBox);
+            Controls.Add(label14);
+            Controls.Add(lossesTextBox);
+            Controls.Add(label13);
             Controls.Add(label12);
             Controls.Add(LEPlengthTextBox);
             Controls.Add(label11);
@@ -299,5 +392,14 @@
         private Label label11;
         private TextBox LEPlengthTextBox;
         private Label label12;
+        private Label label13;
+        private TextBox lossesTextBox;
+        private Label label14;
+        private TextBox powerTextBox;
+        private TextBox sectionTextBox;
+        private Label label15;
+        private ComboBox KoefComboBox;
+        private Label label16;
+        private Button button2;
     }
 }
