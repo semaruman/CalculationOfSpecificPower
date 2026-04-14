@@ -79,5 +79,11 @@ namespace CalculationOfSpecificPowerConsole.Common
 
             return tok;
         }
+
+        //расчёт потерь. Принимает мощность, длину в метрах, коэффициент С, площадь сечения S
+        public static double CalculateLosses(double power, double length, double C, double S)
+        {
+            return (power * length) / (C * S);
+        }
     }
 }
