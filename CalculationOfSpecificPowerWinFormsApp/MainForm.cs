@@ -14,14 +14,16 @@ namespace CalculationOfSpecificPowerWinFormsApp
         private void Form1_Load(object sender, EventArgs e)
         {
             ConsumerTypesComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            KoefComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
             ConsumerTypesComboBox.Items.Add("природный газ");
             ConsumerTypesComboBox.Items.Add("сжиженный газ");
             ConsumerTypesComboBox.Items.Add("электрические плиты");
             ConsumerTypesComboBox.Items.Add("садовые домики");
 
-            KoefComboBox.Items.Add(44);
-            KoefComboBox.Items.Add(72);
+            KoefComboBox.Items.Add("Аллюминий");
+            KoefComboBox.Items.Add("Медь");
+            KoefComboBox.SelectedIndex = 0;
         }
 
         private void CalculateButton_Click(object sender, EventArgs e)
@@ -134,14 +136,17 @@ namespace CalculationOfSpecificPowerWinFormsApp
             }
 
             double C = -1;
-            try
+            if (KoefComboBox.Text == "Аллюминий")
             {
-                C = Convert.ToDouble(KoefComboBox.Text);
+                C = 44;
             }
-            catch
+            else if (KoefComboBox.Text == "Медь")
             {
-                MessageBox.Show("Коэффициент должен быть числом; Вещественные числа отделяются запятой", "Не верный формат входных данных");
-                return;
+                C = 72;
+            }
+            else
+            {
+                MessageBox.Show("Не выбран коэффициент");
             }
 
             double losses = PowerCalculator.CalculateLosses(power, length, C, S);
