@@ -1,0 +1,295 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:CalculationOfSpecificPower.AvaloniaApp.Controls">
+
+  <!-- Glass Card -->
+  <Style Selector="controls|GlassCard">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Padding" Value="18" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <!-- Soft elevation shadow -->
+          <Border CornerRadius="{TemplateBinding CardCornerRadius}"
+                  Margin="6,10,6,0"
+                  Opacity="{TemplateBinding Elevation}"
+                  Background="#66000000"
+                  BoxShadow="0 18 40 2 #66000000" />
+
+          <!-- Outer glass shell -->
+          <Border x:Name="Shell"
+                  CornerRadius="{TemplateBinding CardCornerRadius}"
+                  BorderThickness="1"
+                  ClipToBounds="True"
+                  BoxShadow="0 8 28 0 #40000000">
+            <Border.BorderBrush>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Color="#66FFFFFF" Offset="0" />
+                <GradientStop Color="#22FFFFFF" Offset="0.45" />
+                <GradientStop Color="#44A0C8FF" Offset="1" />
+              </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Color="#2E3A4558" Offset="0" />
+                <GradientStop Color="#22182028" Offset="0.55" />
+                <GradientStop Color="#33101824" Offset="1" />
+              </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid RowDefinitions="Auto,*">
+              <!-- Top highlight sheen -->
+              <Border Grid.RowSpan="2"
+                      Height="72"
+                      VerticalAlignment="Top"
+                      IsHitTestVisible="False"
+                      Opacity="{TemplateBinding Glow}">
+                <Border.Background>
+                  <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                    <GradientStop Color="#28FFFFFF" Offset="0" />
+                    <GradientStop Color="#00FFFFFF" Offset="1" />
+                  </LinearGradientBrush>
+                </Border.Background>
+              </Border>
+
+              <StackPanel Grid.Row="0" Margin="20,18,20,0" Spacing="2"
+                          IsVisible="{TemplateBinding Title, Converter={x:Static ObjectConverters.IsNotNull}}">
+                <TextBlock Text="{TemplateBinding Title}"
+                           FontSize="12"
+                           FontWeight="SemiBold"
+                           LetterSpacing="1.4"
+                           Foreground="#B8C6DA" />
+                <TextBlock Text="{TemplateBinding Subtitle}"
+                           FontSize="11"
+                           Foreground="#6E7A90"
+                           IsVisible="{TemplateBinding Subtitle, Converter={x:Static ObjectConverters.IsNotNull}}" />
+              </StackPanel>
+
+              <ContentPresenter Grid.Row="1"
+                                Content="{TemplateBinding Content}"
+                                Padding="{TemplateBinding Padding}"
+                                Margin="2,4,2,6" />
+            </Grid>
+          </Border>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="controls|GlassCard:pointerover /template/ Border#Shell">
+    <Setter Property="Background">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Color="#3A465568" Offset="0" />
+        <GradientStop Color="#281C2430" Offset="0.55" />
+        <GradientStop Color="#3A142030" Offset="1" />
+      </LinearGradientBrush>
+    </Setter>
+  </Style>
+
+  <!-- Glass Field (floating label input) -->
+  <Style Selector="controls|GlassField">
+    <Setter Property="MinHeight" Value="68" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border x:Name="FieldShell"
+                CornerRadius="14"
+                BorderThickness="1"
+                Padding="14,10"
+                Background="#1AFFFFFF"
+                BorderBrush="#33FFFFFF">
+          <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,*">
+            <TextBlock Grid.ColumnSpan="2"
+                       Text="{TemplateBinding Label}"
+                       FontSize="11"
+                       FontWeight="SemiBold"
+                       LetterSpacing="1.1"
+                       Foreground="#8A97AB"
+                       Margin="0,0,0,4" />
+            <TextBox Grid.Row="1"
+                     Classes="glass-input"
+                     Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                     PlaceholderText="{TemplateBinding Watermark}"
+                     IsReadOnly="{TemplateBinding IsReadOnly}"
+                     VerticalAlignment="Center" />
+            <TextBlock Grid.Row="1" Grid.Column="1"
+                       Text="{TemplateBinding Unit}"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"
+                       FontSize="12"
+                       FontWeight="Medium"
+                       Foreground="#6EC8FF"
+                       Opacity="0.85" />
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="controls|GlassField:pointerover /template/ Border#FieldShell">
+    <Setter Property="Background" Value="#24FFFFFF" />
+    <Setter Property="BorderBrush" Value="#55FFFFFF" />
+  </Style>
+
+  <Style Selector="controls|GlassField /template/ Border#FieldShell:focus-within">
+    <Setter Property="Background" Value="#2AFFFFFF" />
+    <Setter Property="BorderBrush" Value="#886EC8FF" />
+    <Setter Property="BoxShadow" Value="0 0 0 1 #336EC8FF" />
+  </Style>
+
+  <Style Selector="controls|GlassField[HasError=True] /template/ Border#FieldShell">
+    <Setter Property="BorderBrush" Value="#AAE08A8A" />
+    <Setter Property="Background" Value="#22E08A8A" />
+  </Style>
+
+  <!-- Transparent text box inside glass field -->
+  <Style Selector="TextBox.glass-input">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Foreground" Value="#F2F5FA" />
+    <Setter Property="CaretBrush" Value="#6EC8FF" />
+    <Setter Property="SelectionBrush" Value="#446EC8FF" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="MinHeight" Value="28" />
+  </Style>
+
+  <!-- Glass ComboBox -->
+  <Style Selector="ComboBox.glass-combo">
+    <Setter Property="Background" Value="#1AFFFFFF" />
+    <Setter Property="BorderBrush" Value="#33FFFFFF" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="14" />
+    <Setter Property="Foreground" Value="#F2F5FA" />
+    <Setter Property="Padding" Value="14,12" />
+    <Setter Property="MinHeight" Value="48" />
+    <Setter Property="FontSize" Value="14" />
+  </Style>
+
+  <Style Selector="ComboBox.glass-combo:pointerover">
+    <Setter Property="Background" Value="#24FFFFFF" />
+    <Setter Property="BorderBrush" Value="#55FFFFFF" />
+  </Style>
+
+  <Style Selector="ComboBox.glass-combo:focus">
+    <Setter Property="BorderBrush" Value="#886EC8FF" />
+  </Style>
+
+  <!-- Primary glass CTA -->
+  <Style Selector="Button.glass-primary">
+    <Setter Property="Foreground" Value="#F7FBFF" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="LetterSpacing" Value="1.2" />
+    <Setter Property="Padding" Value="18,14" />
+    <Setter Property="MinHeight" Value="48" />
+    <Setter Property="CornerRadius" Value="14" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="BorderBrush">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Color="#AAFFFFFF" Offset="0" />
+        <GradientStop Color="#446EC8FF" Offset="1" />
+      </LinearGradientBrush>
+    </Setter>
+    <Setter Property="Background">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Color="#556EC8FF" Offset="0" />
+        <GradientStop Color="#332A6FA8" Offset="0.55" />
+        <GradientStop Color="#44203858" Offset="1" />
+      </LinearGradientBrush>
+    </Setter>
+  </Style>
+
+  <Style Selector="Button.glass-primary:pointerover">
+    <Setter Property="Background">
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Color="#776EC8FF" Offset="0" />
+        <GradientStop Color="#443A80B8" Offset="0.55" />
+        <GradientStop Color="#55304868" Offset="1" />
+      </LinearGradientBrush>
+    </Setter>
+    <Setter Property="RenderTransform" Value="scale(1.015)" />
+  </Style>
+
+  <Style Selector="Button.glass-primary:pressed">
+    <Setter Property="RenderTransform" Value="scale(0.985)" />
+    <Setter Property="Opacity" Value="0.92" />
+  </Style>
+
+  <!-- Secondary glass button -->
+  <Style Selector="Button.glass-secondary">
+    <Setter Property="Foreground" Value="#D8E2F0" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="FontSize" Value="13" />
+    <Setter Property="Padding" Value="16,12" />
+    <Setter Property="MinHeight" Value="44" />
+    <Setter Property="CornerRadius" Value="14" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="#44FFFFFF" />
+    <Setter Property="Background" Value="#18FFFFFF" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Cursor" Value="Hand" />
+  </Style>
+
+  <Style Selector="Button.glass-secondary:pointerover">
+    <Setter Property="Background" Value="#28FFFFFF" />
+    <Setter Property="BorderBrush" Value="#66FFFFFF" />
+  </Style>
+
+  <Style Selector="Button.glass-secondary:pressed">
+    <Setter Property="RenderTransform" Value="scale(0.985)" />
+  </Style>
+
+  <!-- Caption / section labels -->
+  <Style Selector="TextBlock.section-label">
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="LetterSpacing" Value="1.3" />
+    <Setter Property="Foreground" Value="#8A97AB" />
+    <Setter Property="Margin" Value="2,0,0,8" />
+  </Style>
+
+  <Style Selector="TextBlock.metric-value">
+    <Setter Property="FontSize" Value="36" />
+    <Setter Property="FontWeight" Value="Light" />
+    <Setter Property="Foreground" Value="#F2F5FA" />
+  </Style>
+
+  <Style Selector="TextBlock.metric-unit">
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="Foreground" Value="#6EC8FF" />
+    <Setter Property="Opacity" Value="0.9" />
+  </Style>
+
+  <Style Selector="TextBlock.metric-caption">
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="Foreground" Value="#6E7A90" />
+    <Setter Property="LetterSpacing" Value="1.1" />
+  </Style>
+
+  <!-- Window chrome buttons -->
+  <Style Selector="Button.window-chrome">
+    <Setter Property="Width" Value="36" />
+    <Setter Property="Height" Value="28" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Foreground" Value="#A8B3C7" />
+    <Setter Property="FontSize" Value="12" />
+  </Style>
+
+  <Style Selector="Button.window-chrome:pointerover">
+    <Setter Property="Background" Value="#22FFFFFF" />
+    <Setter Property="Foreground" Value="#F2F5FA" />
+  </Style>
+
+  <Style Selector="Button.window-chrome.close:pointerover">
+    <Setter Property="Background" Value="#66E08A8A" />
+    <Setter Property="Foreground" Value="#FFFFFF" />
+  </Style>
+
+</Styles>

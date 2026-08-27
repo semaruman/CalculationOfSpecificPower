@@ -1,0 +1,315 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:CalculationOfSpecificPower.AvaloniaApp.ViewModels"
+        xmlns:controls="using:CalculationOfSpecificPower.AvaloniaApp.Controls"
+        xmlns:viz="using:CalculationOfSpecificPower.AvaloniaApp.Visualization"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        d:DesignWidth="1440" d:DesignHeight="900"
+        x:Class="CalculationOfSpecificPower.AvaloniaApp.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Icon="/Assets/app-icon.ico"
+        Title="Расчёт удельных мощностей"
+        Width="1440" Height="900"
+        MinWidth="1180" MinHeight="740"
+        WindowStartupLocation="CenterScreen"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaTitleBarHeightHint="40"
+        WindowDecorations="BorderOnly"
+        TransparencyLevelHint="AcrylicBlur,Blur,None"
+        Background="#07090D"
+        FontFamily="Segoe UI Variable Text, Segoe UI, Inter, sans-serif">
+
+  <Design.DataContext>
+    <vm:MainViewModel />
+  </Design.DataContext>
+
+  <Grid>
+    <controls:AmbientBackground HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+
+    <Grid RowDefinitions="40,*,Auto" Margin="0">
+      <!-- Custom title bar -->
+      <Border Grid.Row="0"
+              x:Name="TitleBar"
+              Background="#12000000"
+              WindowDecorationProperties.ElementRole="TitleBar"
+              PointerPressed="TitleBar_OnPointerPressed">
+        <Grid ColumnDefinitions="*,Auto" Margin="16,0,10,0">
+          <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+            <Ellipse Width="8" Height="8" Fill="#6EC8FF" Opacity="0.85" />
+            <TextBlock Text="ENGINEERING CALCULATOR"
+                       FontSize="11"
+                       LetterSpacing="1.6"
+                       FontWeight="SemiBold"
+                       Foreground="#7F8BA0"
+                       VerticalAlignment="Center" />
+          </StackPanel>
+          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4" VerticalAlignment="Center"
+                      WindowDecorationProperties.ElementRole="User">
+            <Button Classes="window-chrome" Content="─" Click="Minimize_Click" ToolTip.Tip="Свернуть" />
+            <Button Classes="window-chrome" Content="□" Click="Maximize_Click" ToolTip.Tip="Развернуть" />
+            <Button Classes="window-chrome close" Content="✕" Click="Close_Click" ToolTip.Tip="Закрыть" />
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <!-- Main scene -->
+      <Grid Grid.Row="1"
+            x:Name="MainScene"
+            Margin="28,8,28,16"
+            RowDefinitions="Auto,*,Auto"
+            ColumnDefinitions="*">
+
+        <!-- Header -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="4,0,4,18" x:Name="HeaderBlock">
+          <StackPanel Spacing="4">
+            <TextBlock Text="РАСЧЁТ УДЕЛЬНЫХ МОЩНОСТЕЙ"
+                       FontSize="28"
+                       FontWeight="SemiBold"
+                       Foreground="#F2F5FA"
+                       LetterSpacing="0.6" />
+            <TextBlock Text="Инженерный расчёт  ·  Power Density Workstation"
+                       FontSize="13"
+                       Foreground="#8A97AB" />
+          </StackPanel>
+
+          <Border Grid.Column="1"
+                  VerticalAlignment="Center"
+                  CornerRadius="20"
+                  Padding="14,8"
+                  BorderThickness="1"
+                  BorderBrush="#33FFFFFF"
+                  Background="#18FFFFFF">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+              <Ellipse Width="8" Height="8">
+                <Ellipse.Fill>
+                  <SolidColorBrush Color="#6ED6B0" />
+                </Ellipse.Fill>
+              </Ellipse>
+              <TextBlock Text="{Binding StatusText}"
+                         FontSize="11"
+                         FontWeight="SemiBold"
+                         LetterSpacing="1.4"
+                         Foreground="#C5D0E0"
+                         VerticalAlignment="Center" />
+            </StackPanel>
+          </Border>
+        </Grid>
+
+        <!-- Body: inputs | 3D | side params -->
+        <Grid Grid.Row="1" ColumnDefinitions="360,*,300" ColumnSpacing="18">
+
+          <!-- INPUT CARD -->
+          <controls:GlassCard Grid.Column="0"
+                              x:Name="InputCard"
+                              Title="Input Parameters"
+                              Subtitle="Потребители и режим"
+                              Elevation="1.0"
+                              Glow="0.45">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <StackPanel Spacing="12">
+                <controls:GlassField Label="Количество потребителей"
+                                     Unit="шт"
+                                     Watermark="например 55"
+                                     Text="{Binding ConsumersCountText}"
+                                     HasError="{Binding ConsumersCountHasError}" />
+
+                <StackPanel Spacing="6">
+                  <TextBlock Classes="section-label" Text="ТИП ПОТРЕБИТЕЛЯ" />
+                  <ComboBox Classes="glass-combo"
+                            ItemsSource="{Binding ConsumerTypes}"
+                            SelectedItem="{Binding SelectedConsumerType}"
+                            DisplayMemberBinding="{Binding DisplayName}"
+                            HorizontalAlignment="Stretch"
+                            PlaceholderText="Выберите тип" />
+                </StackPanel>
+
+                <controls:GlassField Label="Cos φ"
+                                     Unit="—"
+                                     Watermark="0,98"
+                                     Text="{Binding CosFText}"
+                                     HasError="{Binding CosFHasError}" />
+
+                <Button Classes="glass-primary"
+                        Content="РАССЧИТАТЬ МОЩНОСТЬ"
+                        Command="{Binding CalculatePowerCommand}"
+                        Margin="0,8,0,0" />
+
+                <Border Height="1" Background="#22FFFFFF" Margin="0,6" />
+
+                <controls:GlassField Label="Длина ЛЭП"
+                                     Unit="м"
+                                     Watermark="метры"
+                                     Text="{Binding LepLengthText}"
+                                     HasError="{Binding LepLengthHasError}" />
+
+                <Button Classes="glass-secondary"
+                        Content="РАССЧИТАТЬ МОМЕНТ"
+                        Command="{Binding CalculateMomentCommand}" />
+              </StackPanel>
+            </ScrollViewer>
+          </controls:GlassCard>
+
+          <!-- 3D VISUALIZATION -->
+          <controls:GlassCard Grid.Column="1"
+                              x:Name="VizCard"
+                              Title="3D Visualization"
+                              Subtitle="Интерактивное поле удельной мощности"
+                              Elevation="1.15"
+                              Glow="0.55"
+                              Padding="0">
+            <Border CornerRadius="14" ClipToBounds="True" Margin="0" MinHeight="380" Background="#10081018">
+              <viz:PowerFieldView SpecificPower="{Binding VizSpecificPower}"
+                                  FullPower="{Binding VizFullPower}"
+                                  CurrentAmps="{Binding VizCurrent}"
+                                  IsActive="{Binding HasResults}" />
+            </Border>
+          </controls:GlassCard>
+
+          <!-- LINE / LOSSES CARD -->
+          <controls:GlassCard Grid.Column="2"
+                              x:Name="LineCard"
+                              Title="Line &amp; Losses"
+                              Subtitle="Сечение и материал"
+                              Elevation="1.0"
+                              Glow="0.4">
+            <StackPanel Spacing="12">
+              <controls:GlassField Label="Мощность"
+                                   Unit="кВт"
+                                   Watermark="из расчёта"
+                                   Text="{Binding PowerText}"
+                                   HasError="{Binding PowerHasError}" />
+
+              <controls:GlassField Label="Сечение"
+                                   Unit="мм²"
+                                   Watermark="S"
+                                   Text="{Binding SectionText}"
+                                   HasError="{Binding SectionHasError}" />
+
+              <StackPanel Spacing="6">
+                <TextBlock Classes="section-label" Text="КОЭФФИЦИЕНТ / МАТЕРИАЛ" />
+                <ComboBox Classes="glass-combo"
+                          ItemsSource="{Binding Materials}"
+                          SelectedItem="{Binding SelectedMaterial}"
+                          DisplayMemberBinding="{Binding DisplayName}"
+                          HorizontalAlignment="Stretch" />
+              </StackPanel>
+
+              <Button Classes="glass-secondary"
+                      Content="РАССЧИТАТЬ ПОТЕРИ"
+                      Command="{Binding CalculateLossesCommand}"
+                      Margin="0,8,0,0" />
+
+              <Border Margin="0,10,0,0"
+                      Padding="12"
+                      CornerRadius="12"
+                      Background="#14FFFFFF"
+                      BorderBrush="#22FFFFFF"
+                      BorderThickness="1">
+                <StackPanel Spacing="4">
+                  <TextBlock Classes="metric-caption" Text="AUTHOR" />
+                  <TextBlock Text="Румянцев С.Д." Foreground="#C5D0E0" FontSize="13" />
+                  <TextBlock Text="semaruman@yandex.ru" Foreground="#6E7A90" FontSize="11" />
+                </StackPanel>
+              </Border>
+            </StackPanel>
+          </controls:GlassCard>
+        </Grid>
+
+        <!-- RESULTS -->
+        <controls:GlassCard Grid.Row="2"
+                            x:Name="ResultsCard"
+                            Title="Results"
+                            Subtitle="Инженерный вывод"
+                            Elevation="1.2"
+                            Glow="0.5"
+                            Margin="0,18,0,0"
+                            MinHeight="150">
+          <Grid ColumnDefinitions="*,*,*,*,*" ColumnSpacing="12">
+            <Border Classes="metric-tile" Background="#14FFFFFF" CornerRadius="14" Padding="14">
+              <StackPanel Spacing="4">
+                <TextBlock Classes="metric-caption" Text="Pуд · КВТ / 1 КВ" />
+                <TextBlock Classes="metric-value" Text="{Binding SpecificPowerText}" FontSize="30" />
+                <TextBlock Classes="metric-unit" Text="кВт" />
+              </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1" Background="#14FFFFFF" CornerRadius="14" Padding="14">
+              <StackPanel Spacing="4">
+                <TextBlock Classes="metric-caption" Text="Рр · ИТОГО" />
+                <TextBlock Classes="metric-value" Text="{Binding FullPowerText}" FontSize="30" />
+                <TextBlock Classes="metric-unit" Text="кВт" />
+              </StackPanel>
+            </Border>
+
+            <Border Grid.Column="2" Background="#14FFFFFF" CornerRadius="14" Padding="14">
+              <StackPanel Spacing="4">
+                <TextBlock Classes="metric-caption" Text="Iр · ТОК" />
+                <TextBlock Classes="metric-value" Text="{Binding CurrentText}" FontSize="30" />
+                <TextBlock Classes="metric-unit" Text="А" />
+              </StackPanel>
+            </Border>
+
+            <Border Grid.Column="3" Background="#14FFFFFF" CornerRadius="14" Padding="14">
+              <StackPanel Spacing="4">
+                <TextBlock Classes="metric-caption" Text="МОМЕНТ" />
+                <TextBlock Classes="metric-value" Text="{Binding MomentText}" FontSize="30" />
+                <TextBlock Classes="metric-unit" Text="кВт·м" />
+              </StackPanel>
+            </Border>
+
+            <Border Grid.Column="4" Background="#14FFFFFF" CornerRadius="14" Padding="14">
+              <StackPanel Spacing="4">
+                <TextBlock Classes="metric-caption" Text="ПОТЕРИ" />
+                <TextBlock Classes="metric-value" Text="{Binding LossesText}" FontSize="30" />
+                <TextBlock Classes="metric-unit" Text="%" />
+              </StackPanel>
+            </Border>
+          </Grid>
+        </controls:GlassCard>
+      </Grid>
+
+      <!-- Footer strip -->
+      <Border Grid.Row="2" Height="28" Background="#10000000">
+        <TextBlock Text="Dark Glass  ·  Precision Engineering  ·  2026"
+                   FontSize="10"
+                   LetterSpacing="1.2"
+                   Foreground="#4E596C"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+      </Border>
+    </Grid>
+
+    <!-- Glass notification overlay -->
+    <Border IsVisible="{Binding HasNotification}"
+            Background="#66000000"
+            ZIndex="100">
+      <controls:GlassCard Width="420"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Title="Check Input"
+                          Subtitle="Требуется проверка"
+                          Elevation="1.4"
+                          Glow="0.6"
+                          Margin="24">
+        <StackPanel Spacing="16">
+          <TextBlock Text="{Binding NotificationTitle}"
+                     FontSize="16"
+                     FontWeight="SemiBold"
+                     Foreground="#F2F5FA" />
+          <TextBlock Text="{Binding NotificationMessage}"
+                     FontSize="13"
+                     TextWrapping="Wrap"
+                     Foreground="#A8B3C7" />
+          <Button Classes="glass-primary"
+                  Content="OK"
+                  Command="{Binding DismissNotificationCommand}"
+                  HorizontalAlignment="Right"
+                  MinWidth="120" />
+        </StackPanel>
+      </controls:GlassCard>
+    </Border>
+  </Grid>
+</Window>
