@@ -6,6 +6,7 @@ using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Styling;
 using Avalonia.Threading;
+using Avalonia.VisualTree;
 
 namespace CalculationOfSpecificPower.AvaloniaApp.Views;
 
@@ -15,6 +16,19 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         Opened += async (_, _) => await PlayEntranceAsync();
+        PropertyChanged += (_, e) =>
+        {
+            if (e.Property == WindowStateProperty)
+                UpdateMaximizeButtonGlyph();
+        };
+    }
+
+    private void UpdateMaximizeButtonGlyph()
+    {
+        if (MaximizeButton is null) return;
+        MaximizeButton.Content = WindowState == WindowState.Maximized ? "❐" : "□";
+        ToolTip.SetTip(MaximizeButton,
+            WindowState == WindowState.Maximized ? "Восстановить" : "Развернуть");
     }
 
     private async Task PlayEntranceAsync()
@@ -69,9 +83,17 @@ public partial class MainWindow : Window
 
     private void TitleBar_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
+        // Ignore if click landed on an interactive chrome control
+        if (e.Source is Visual source && source.FindAncestorOfType<Button>() is not null)
+            return;
+
+        if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed == false)
+            return;
+
         if (e.ClickCount == 2)
         {
             WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+            e.Handled = true;
             return;
         }
 

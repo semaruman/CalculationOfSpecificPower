@@ -33,24 +33,49 @@
       <!-- Custom title bar -->
       <Border Grid.Row="0"
               x:Name="TitleBar"
-              Background="#12000000"
-              WindowDecorationProperties.ElementRole="TitleBar"
-              PointerPressed="TitleBar_OnPointerPressed">
-        <Grid ColumnDefinitions="*,Auto" Margin="16,0,10,0">
-          <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
-            <Ellipse Width="8" Height="8" Fill="#6EC8FF" Opacity="0.85" />
-            <TextBlock Text="ENGINEERING CALCULATOR"
-                       FontSize="11"
-                       LetterSpacing="1.6"
-                       FontWeight="SemiBold"
-                       Foreground="#7F8BA0"
-                       VerticalAlignment="Center" />
-          </StackPanel>
-          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4" VerticalAlignment="Center"
-                      WindowDecorationProperties.ElementRole="User">
-            <Button Classes="window-chrome" Content="─" Click="Minimize_Click" ToolTip.Tip="Свернуть" />
-            <Button Classes="window-chrome" Content="□" Click="Maximize_Click" ToolTip.Tip="Развернуть" />
-            <Button Classes="window-chrome close" Content="✕" Click="Close_Click" ToolTip.Tip="Закрыть" />
+              Height="40"
+              Background="#12000000">
+        <Grid ColumnDefinitions="*,Auto">
+          <!-- Draggable region (left) -->
+          <Border Grid.Column="0"
+                  Background="Transparent"
+                  WindowDecorationProperties.ElementRole="TitleBar"
+                  PointerPressed="TitleBar_OnPointerPressed">
+            <StackPanel Orientation="Horizontal"
+                        Spacing="10"
+                        Margin="16,0,12,0"
+                        VerticalAlignment="Center">
+              <Ellipse Width="8" Height="8" Fill="#6EC8FF" Opacity="0.85" />
+              <TextBlock Text="ENGINEERING CALCULATOR"
+                         FontSize="11"
+                         LetterSpacing="1.6"
+                         FontWeight="SemiBold"
+                         Foreground="#7F8BA0"
+                         VerticalAlignment="Center" />
+            </StackPanel>
+          </Border>
+
+          <!-- Window chrome (right) — standard 46×40 hit targets -->
+          <StackPanel Grid.Column="1"
+                      Orientation="Horizontal"
+                      VerticalAlignment="Stretch"
+                      Spacing="0">
+            <Button Classes="window-chrome"
+                    WindowDecorationProperties.ElementRole="MinimizeButton"
+                    Content="─"
+                    Click="Minimize_Click"
+                    ToolTip.Tip="Свернуть" />
+            <Button Classes="window-chrome"
+                    WindowDecorationProperties.ElementRole="MaximizeButton"
+                    x:Name="MaximizeButton"
+                    Content="□"
+                    Click="Maximize_Click"
+                    ToolTip.Tip="Развернуть" />
+            <Button Classes="window-chrome close"
+                    WindowDecorationProperties.ElementRole="CloseButton"
+                    Content="✕"
+                    Click="Close_Click"
+                    ToolTip.Tip="Закрыть" />
           </StackPanel>
         </Grid>
       </Border>

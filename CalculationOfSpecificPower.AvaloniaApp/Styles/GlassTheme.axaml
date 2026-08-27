@@ -270,16 +270,25 @@
     <Setter Property="LetterSpacing" Value="1.1" />
   </Style>
 
-  <!-- Window chrome buttons -->
+  <!-- Window chrome buttons (Windows caption: 46×40) -->
   <Style Selector="Button.window-chrome">
-    <Setter Property="Width" Value="36" />
-    <Setter Property="Height" Value="28" />
+    <Setter Property="Width" Value="46" />
+    <Setter Property="Height" Value="40" />
+    <Setter Property="MinWidth" Value="46" />
+    <Setter Property="MinHeight" Value="40" />
     <Setter Property="Padding" Value="0" />
-    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="Margin" Value="0" />
+    <Setter Property="CornerRadius" Value="0" />
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="Foreground" Value="#A8B3C7" />
-    <Setter Property="FontSize" Value="12" />
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI, sans-serif" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="Cursor" Value="Hand" />
   </Style>
 
   <Style Selector="Button.window-chrome:pointerover">
@@ -287,8 +296,17 @@
     <Setter Property="Foreground" Value="#F2F5FA" />
   </Style>
 
+  <Style Selector="Button.window-chrome:pressed">
+    <Setter Property="Background" Value="#33FFFFFF" />
+  </Style>
+
   <Style Selector="Button.window-chrome.close:pointerover">
-    <Setter Property="Background" Value="#66E08A8A" />
+    <Setter Property="Background" Value="#E81123" />
+    <Setter Property="Foreground" Value="#FFFFFF" />
+  </Style>
+
+  <Style Selector="Button.window-chrome.close:pressed">
+    <Setter Property="Background" Value="#C50F1F" />
     <Setter Property="Foreground" Value="#FFFFFF" />
   </Style>
 
